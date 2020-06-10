@@ -14,7 +14,18 @@
     <%= stylesheet_link_tag    'application', media: 'all' %>
   </head>
 
-  <body>
+  <body>    
+   <ul>
+        <li>
+          <a href="/users">Users</a>
+        </li>
+        <li>
+          <a href="/photos">Photos</a>
+        </li>
+      </ul>
+
+
     <%= yield %>
+     
   </body>
 </html>
