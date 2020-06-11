@@ -25,10 +25,28 @@ def details
     match = User.where({ :username => the_un})
     @the_user = match.at(0)
 
-    user_id = @the_user.id
-    user_photos = Photo.all.where({ :id => user_id})
-    @photo_count = user_photos.count
+  @all_user_photos = Photo.where({ :owner_id => @the_user.id})
+
 
     render({ :template => "pages/user_page"})
+
+# Parameters: :photo_id => "177"
+  
+  #  id_num = params.fetch("photo_id")
+  #  match = Photo.where({ :id => id_num})
+  #  @the_photo = match.at(0)
+  #  @image = @the_photo.image
+   # @caption = @the_photo.caption
+   # @owner = @the_photo.owner_id
+   # @posted = @the_photo.created_at
+
+  #  owner_match = User.where({ :id => @owner})
+  #  @the_owner = owner_match.at(0)
+   # @owner_name = @the_owner.username
+
+#    @all_comments = Comment.where({ :photo_id => @the_photo.id})
+
+
+
   end
 end

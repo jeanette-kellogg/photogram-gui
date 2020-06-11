@@ -1,22 +1,22 @@
 class PhotosController < ApplicationController
   
 def add_comment
-
 #Params: "input_photo_id"=>"777", "input_author_id"=>"33", "input_body"=>"adsfdsaf", "controller"=>"photos", "action"=>"add_comment"}
 
   comment_photo = params.fetch("input_photo_id")
   comment_author_id = params.fetch("input_author_id")
   comment_body = params.fetch("input_body")
 
-  @c = Comment.new
-  @c.photo_id = comment_photo
-  @c.body = comment_author_id
-  @c.author_id = comment_body
+  @comment = Comment.new
+  @comment.photo_id = comment_photo
+  @comment.body = comment_body
+  @comment.author_id = comment_author_id
 
- @c.save
+  @comment.save
 
- # @c_id = @c.id
-  details_path = "/photos" 
+  @directions = @comment.id.to_s
+
+  details_path = "/photos/" + @directions
   redirect_to(details_path)
 end
 
@@ -24,17 +24,21 @@ end
 def add_photo
   #Params :"input_image"=>"asfd", "input_caption"=>"asfadsf", "input_owner_id"=>"asdfasdf"
 
-    new_url = params.fetch("input_image")
+    
     new_caption = params.fetch("input_caption")
+    new_url = params.fetch("input_image")
     new_owner = params.fetch("input_owner_id")
 
-    p = Photo.new
-    p.image = new_url
-    p.caption = new_caption
-    p.owner_id = new_owner
-    p.save
+    @p = Photo.new
+    @p.caption = new_caption
+    @p.image = new_url
+    @p.owner_id = new_owner
 
-  details_path = "/photos/77" 
+    @p.save
+
+    @onedirections = @p.id.to_s
+
+  details_path = "/photos/" + @onedirections 
   redirect_to(details_path)
 
 end

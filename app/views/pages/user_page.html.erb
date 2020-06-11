@@ -1,7 +1,34 @@
 <h1> <%= @the_user.username %> </h1>
 
 
-<h2>Own photos (11)</h2>
+<h2>Own photos (<%= @all_user_photos %>)</h2>
 
 
-<%= @photo_count %>
+
+  <% @all_user_photos.each do |an_image| %>
+  <tr>
+      <td>
+        <img src="<%= an_image.image %>">
+      </td>
+
+      <td>
+     <%= an_image.caption %>
+      </td>
+
+     <td>
+      <% u_id = an_image.owner_id %>
+      <% matches = User.where ({ :id => u_id}) %>
+      <% the_user = matches.at(0) %>
+       <%= the_user.username %>
+      </td>
+
+       <td>
+     <%= an_image.created_at %>
+      </td>
+       <td>
+      <a href="/photos/<%= an_image.id %>">Show details</a>
+      </td>
+    </tr>
+
+    <% end%>
+</table>
