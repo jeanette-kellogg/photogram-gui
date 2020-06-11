@@ -1,22 +1,71 @@
 <h1>Photo Details</h1>
 
+
 <dl>
   <dt>Image</dt>
   <dd>
-   
+    <img src="<%= @image %>">
   </dd>
 
   <dt>Caption</dt>
   <dd>
-    <p></p>
+    <p>    <%= @caption%>   </p>
   </dd>
 
-  <dt>Owner</dt>
+  <dt>Author ID</dt>
   <dd>
-
+    <%= @owner_name%>   
   </dd>
 
   <dt>Posted</dt>
   <dd>
-
+    <%= @posted%>   
   </dd>
+</dl>
+
+<h2>Comments</h2>
+
+<table>
+  <tr>
+    <th>Commenter</th>
+    <th>Comment</th>
+    <th>Posted</th>
+  </tr>
+
+ <% @all_comments.each do |a_comment| %>
+
+ <tr>
+    <td>
+      <% u_id = a_comment.author_id %>
+      <% matches = User.where ({ :id => u_id}) %>
+      <% the_user = matches.at(0) %>
+       <%= the_user.username %>
+    </td>
+
+    <td>
+       <%= a_comment.body %>
+    </td>
+
+    <td>
+       <%= a_comment.created_at %>
+    </td>
+  </tr>
+
+    <% end%>
+
+  </table>
+
+
+
+<form action="/insert_comment_record">
+  <label for="browser_photo_id">Photo ID</label>
+  <input id="browser_photo_id" type="text" value="777" name="input_photo_id">
+
+  <label for="browser_author_id">Author ID</label>
+  <input id="browser_author_id" type="text" name="input_author_id">
+
+  <label for="browser_comment">Comment</label>
+  <textarea id="browser_comment" name="input_body" placeholder="Enter a comment..."></textarea>
+
+  <button>Add comment</button>
+</form>
