@@ -1,8 +1,17 @@
 class UsersController < ApplicationController
 
-def add_user
+def add_row
+  #Params :any_username=name
 
-  render ({ :template => "pages/createuser.html.erb"})
+    new_user = params.fetch("any_username")
+    
+    @user = User.new
+    @user.username = new_user
+    @user.save
+
+  details_path = "/users/" + @user.username
+  redirect_to(details_path)
+
 end
   
   def users
@@ -11,7 +20,7 @@ end
   end
 
 def details
-  # Parameters: :any_username => "name"
+  # Parameters: :add_username => "name"
     the_un = params.fetch("any_username")
     match = User.where({ :username => the_un})
     @the_user = match.at(0)

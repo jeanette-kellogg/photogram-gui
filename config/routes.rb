@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-get("/insert_user_record", { :controller => "users", :action => "add_user" })
+get("/insert_user_record", { :controller => "users", :action => "add_row" })
 
 get("/insert_photo_record", { :controller => "photos", :action => "add_photo" })
 
